@@ -1,0 +1,7 @@
+CREATE TABLE cards (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  Task VARCHAR(255),
+  due_date DATETIME,
+  board_id VARCHAR(255),
+  position INT(11) NOT NULL DEFAULT '100'
+);

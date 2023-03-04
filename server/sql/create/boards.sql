@@ -1,0 +1,5 @@
+CREATE TABLE boards (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  Title VARCHAR(255),
+  uuid VARCHAR(255)
+)
