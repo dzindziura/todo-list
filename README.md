@@ -5,7 +5,7 @@
 ### Client
 + Go to the client folder: cd client
 + Install packages: npm i
-+ Create env variables: for example "REACT_APP_API=http://localhost:4000/api", c
++ Create env variables: for example "REACT_APP_API=http://localhost:4000/api"
 + Run project: npm start
 
 ### Server:
