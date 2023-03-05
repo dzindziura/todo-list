@@ -1,5 +1,5 @@
-CREATE TABLE boards (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  Title VARCHAR(255),
-  uuid VARCHAR(255)
-)
+CREATE TABLE `boards` (
+  `id` int(11) NOT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `uuid` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

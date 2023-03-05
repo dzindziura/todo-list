@@ -1,7 +1,7 @@
-CREATE TABLE cards (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  Task VARCHAR(255),
-  due_date DATETIME,
-  board_id VARCHAR(255),
-  position INT(11) NOT NULL DEFAULT '100'
-);
+CREATE TABLE `cards` (
+  `Task` varchar(255) DEFAULT NULL,
+  `due_date` datetime DEFAULT NULL,
+  `board_id` varchar(255) DEFAULT NULL,
+  `position` int(11) NOT NULL DEFAULT 100,
+  `id` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
