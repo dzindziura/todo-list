@@ -11,6 +11,7 @@ const {
   deleteCard,
   deleteBoard,
   updateTitleBoard,
+  updateTitleCard
 } = require("./controller/Controller");
 
 const { PORT, HOST } = require("./constants/constants");
@@ -36,6 +37,8 @@ app.delete("/api/deleteCard/:id", deleteCard);
 app.delete("/api/deleteBoard/:id", deleteBoard);
 
 app.post("/api/updateTitleBoard", updateTitleBoard);
+
+app.post("/api/updateTitleCard", updateTitleCard);
 
 app.listen(PORT, () => {
   console.log(`Server is running: http:/${HOST}:${PORT}`);

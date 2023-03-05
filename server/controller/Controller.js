@@ -34,9 +34,9 @@ const addCards = async (req, res) => {
     const card = {
       Task: req.body.Task,
       board_id: req.body.board_id,
-      id: req.body.id
+      id: req.body.id,
     };
-    
+
     const result = await connection
       .promise()
       .query("INSERT INTO cards SET ?", card);
@@ -71,7 +71,8 @@ const getBoards = async (req, res) => {
 
 const updateCard = async (req, res) => {
   try {
-    const { id, board_id, position} = req.body;
+    const { id, board_id, position } = req.body;
+    const date = Date.now();
     if (board_id === undefined) {
       position.map((item, index) => {
         connection.query(
@@ -140,6 +141,22 @@ const updateTitleBoard = (req, res) => {
   );
 };
 
+const updateTitleCard = (req, res) => {
+  connection.query(
+    `UPDATE cards SET Task = "${req.body.name}" WHERE id = "${req.body.id}"`,
+    (error, results, fields) => {
+      if (error) {
+        console.error("Error updating card title: " + error.stack);
+        res.status(500).send("Error updating board title");
+        return;
+      }
+      res.json({
+        results,
+      });
+    }
+  );
+};
+
 module.exports = {
   createBoards,
   addCards,
@@ -149,4 +166,5 @@ module.exports = {
   deleteCard,
   deleteBoard,
   updateTitleBoard,
+  updateTitleCard,
 };
