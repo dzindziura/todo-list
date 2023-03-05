@@ -12,6 +12,8 @@ import {
   deleteCards,
   deleteBoards,
   addNewBoards,
+  sort,
+  dragEnd,
 } from "../../../store/Kanban/KanbanSlice";
 import {
   GETCARDS,
@@ -21,6 +23,7 @@ import {
   DELETECARD,
   DELETEBOARD,
   UPDATETITLEBOARD,
+  UPDATECARDTITLE,
 } from "../../../constants/constants";
 import { GederadeBoard } from "../GeneredeBoard/GeneradeBoard";
 
@@ -76,7 +79,7 @@ const Kanban = () => {
         },
       });
       const updCards = {
-        id: result.draggableId,
+        id: removed.id,
         board_id: destination.droppableId,
         position: destItems.map((item) => item.id),
       };
@@ -96,11 +99,12 @@ const Kanban = () => {
       });
 
       const updCards = {
-        id: result.draggableId,
+        id: removed.id,
         position: copiedItems.map((item) => item.id),
       };
       axios.post(UPDATECARD, updCards);
     }
+    dispatch(dragEnd(columns));
   };
   const deleteBorad = (id) => {
     dispatch(deleteBoards(id));
@@ -118,14 +122,9 @@ const Kanban = () => {
       Title: "New Board",
       uuid: uuidv4(),
     };
-    axios.post(CREATEBOARDS, data).then((response) => {
-      const result = {
-        id: response.data[0].insertId,
-        Title: data.Title,
-        uuid: data.uuid,
-      };
-      dispatch(addNewBoards(result));
-    });
+    dispatch(addNewBoards(data));
+
+    axios.post(CREATEBOARDS, data);
   };
 
   const changeNameBoard = () => {
@@ -135,7 +134,12 @@ const Kanban = () => {
   const setNewNameBoard = (name, id) => {
     axios.post(UPDATETITLEBOARD, { name, id });
   };
-
+  const updateCard = (id, name) => {
+    axios.post(UPDATECARDTITLE, { id, name });
+  };
+  const sortBy = (value, columnId) => {
+    dispatch(sort({ id: columnId, value: value }));
+  };
   if (apiStatus !== "pending" && columns !== null) {
     return (
       <DragDropContext
@@ -153,6 +157,8 @@ const Kanban = () => {
               deleteCard={deleteCard}
               deleteBorad={deleteBorad}
               setNewNameBoard={setNewNameBoard}
+              updateCard={updateCard}
+              sortBy={sortBy}
             />
           </TaskColumnStyles>
         </Container>
