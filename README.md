@@ -14,3 +14,6 @@
 + Go to constants/constants.js and change my data for connecting to the database to yours
 + Run: node sqlRun.jsx for create db and tables
 + Run project: npm run dev
+
+
++ live demo: https://dzindziura.github.io/dzindziura/
